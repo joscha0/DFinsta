@@ -31,6 +31,10 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  Text(
+                    "DFinsta",
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
                   SwitchListTile(
                     title: const Text('hide Explore'),
                     value: hideExplore,
