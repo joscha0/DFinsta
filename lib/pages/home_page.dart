@@ -1,3 +1,4 @@
+import 'package:dfinsta/widgets/settings_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,11 @@ class HomePage extends GetView<HomeController> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 28.0),
         child: FloatingActionButton.small(
-          onPressed: () {},
+          onPressed: () {
+            Get.bottomSheet(
+              const SettingsBottomSheet(),
+            );
+          },
           child: const Icon(Icons.settings),
         ),
       ),

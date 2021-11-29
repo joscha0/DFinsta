@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             primary: Colors.pink,
           )),
       themeMode: ThemeMode.system,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
