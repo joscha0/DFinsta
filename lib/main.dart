@@ -1,33 +1,33 @@
+import 'package:dfinsta/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  String selectedUrl = "https://www.instagram.com/";
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter WebView Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        backgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.pink,
+          primary: Colors.pink,
+        ),
       ),
-      routes: {
-        '/': (_) => WebviewScaffold(
-              url: selectedUrl,
-              appBar: AppBar(
-                title: const Text('Widget webview'),
-              ),
-              withZoom: true,
-              withLocalStorage: true,
-              hidden: true,
-            ),
-      },
+      darkTheme: ThemeData.dark().copyWith(
+          backgroundColor: Colors.black,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: Colors.pink,
+            primary: Colors.pink,
+          )),
+      themeMode: ThemeMode.system,
+      home: HomePage(),
     );
   }
 }
