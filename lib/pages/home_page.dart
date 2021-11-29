@@ -10,6 +10,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -20,6 +21,11 @@ class HomePage extends GetView<HomeController> {
               ? Uri.parse("https://www.instagram.com/?theme=dark")
               : Uri.parse("https://www.instagram.com/"),
         ),
+        onLoadStop: (webController, url) async {
+          Uri? currentUrl = await webController.getUrl();
+          String css = controller.getHideCss(currentUrl);
+          await webController.injectCSSCode(source: css);
+        },
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 28.0),
