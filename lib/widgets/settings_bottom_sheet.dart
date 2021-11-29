@@ -11,7 +11,6 @@ class SettingsBottomSheet extends StatefulWidget {
 
 class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
   bool hideExplore = true;
-  bool hideSuggestions = true;
   bool hideStories = false;
   bool hideFeed = false;
 
@@ -23,19 +22,42 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
         color: Theme.of(context).backgroundColor,
         child: Wrap(
           children: [
-            Column(
-              children: [
-                SwitchListTile(
-                  title: const Text('hide Feed'),
-                  value: hideFeed,
-                  onChanged: (bool value) {
-                    setState(() {
-                      hideFeed = value;
-                    });
-                    controller.hideFeed.value = value;
-                  },
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SwitchListTile(
+                    title: const Text('hide Explore'),
+                    value: hideExplore,
+                    onChanged: (bool value) {
+                      setState(() {
+                        hideExplore = value;
+                      });
+                      controller.hideExplore.value = value;
+                    },
+                  ),
+                  SwitchListTile(
+                    title: const Text('hide Stories'),
+                    value: hideStories,
+                    onChanged: (bool value) {
+                      setState(() {
+                        hideStories = value;
+                      });
+                      controller.hideStories.value = value;
+                    },
+                  ),
+                  SwitchListTile(
+                    title: const Text('hide Feed'),
+                    value: hideFeed,
+                    onChanged: (bool value) {
+                      setState(() {
+                        hideFeed = value;
+                      });
+                      controller.hideFeed.value = value;
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
