@@ -10,15 +10,20 @@ class SettingsBottomSheet extends StatefulWidget {
 }
 
 class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
-  bool hideExplore = true;
-  bool hideStories = false;
-  bool hideFeed = false;
+  late bool hideExplore, hideStories, hideFeed;
+
+  HomeController controller = HomeController();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(),
-      builder: (controller) => (Container(
+      init: controller,
+      initState: (ctr) {
+        hideExplore = controller.hideExplore.value;
+        hideStories = controller.hideStories.value;
+        hideFeed = controller.hideFeed.value;
+      },
+      builder: (_) => (Container(
         color: Theme.of(context).backgroundColor,
         child: Wrap(
           children: [
@@ -33,7 +38,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideExplore = value;
                       });
-                      controller.hideExplore.value = value;
+                      controller.setHideExplore(value);
                     },
                   ),
                   SwitchListTile(
@@ -43,7 +48,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideStories = value;
                       });
-                      controller.hideStories.value = value;
+                      controller.setHideStorie(value);
                     },
                   ),
                   SwitchListTile(
@@ -53,7 +58,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideFeed = value;
                       });
-                      controller.hideFeed.value = value;
+                      controller.setHideFeed(value);
                     },
                   ),
                 ],

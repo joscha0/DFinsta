@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
-  RxBool hideExplore = true.obs;
-  RxBool hideStories = false.obs;
-  RxBool hideFeed = false.obs;
+  final box = GetStorage();
+  RxBool get hideExplore => RxBool(box.read("hideExplore") ?? true);
+  RxBool get hideStories => RxBool(box.read("hideStories") ?? false);
+  RxBool get hideFeed => RxBool(box.read("hideFeed") ?? false);
+
+  void setHideExplore(bool val) => box.write("hideExplore", val);
+  void setHideStorie(bool val) => box.write("hideStories", val);
+  void setHideFeed(bool val) => box.write("hideFeed", val);
 
   String cssHideFeed = """
 [role=main] {
