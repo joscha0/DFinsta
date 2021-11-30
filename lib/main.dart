@@ -14,22 +14,52 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  final Color primaryColor = Colors.pink;
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         backgroundColor: Colors.white,
+        switchTheme: SwitchThemeData(
+          thumbColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return primaryColor;
+            }
+          }),
+          trackColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return Colors.pinkAccent;
+            }
+          }),
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: Colors.pink,
-          primary: Colors.pink,
+          secondary: primaryColor,
+          primary: primaryColor,
         ),
       ),
       darkTheme: ThemeData.dark().copyWith(
           backgroundColor: Colors.black,
+          switchTheme: SwitchThemeData(
+            thumbColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return primaryColor;
+              }
+            }),
+            trackColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return Colors.pinkAccent;
+              }
+            }),
+          ),
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Colors.pink,
-            primary: Colors.pink,
+            secondary: primaryColor,
+            primary: primaryColor,
           )),
       themeMode: ThemeMode.system,
       home: const HomePage(),
