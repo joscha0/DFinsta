@@ -1,7 +1,6 @@
 import 'package:dfinsta/widgets/settings_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 
 import 'home_controller.dart';
