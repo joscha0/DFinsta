@@ -43,33 +43,16 @@ class HomePage extends GetView<HomeController> {
           return NavigationActionPolicy.ALLOW;
         },
       ),
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.menu_close,
-        overlayColor: Theme.of(context).backgroundColor,
-        children: [
-          SpeedDialChild(
-            child: const Icon(Icons.settings),
-            label: "settings",
-            onTap: () {
-              Get.bottomSheet(
-                const SettingsBottomSheet(),
-              );
-            },
-          ),
-          SpeedDialChild(
-              child: const Icon(Icons.person),
-              label: "profile",
-              onTap: () {
-                controller.webViewController?.loadUrl(
-                    urlRequest: URLRequest(
-                  url: Uri.parse(url + "profile"),
-                ));
-              }),
-          SpeedDialChild(
-            child: const Icon(Icons.home),
-            label: "home",
-          ),
-        ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 28.0),
+        child: FloatingActionButton.small(
+          onPressed: () {
+            Get.bottomSheet(
+              const SettingsBottomSheet(),
+            );
+          },
+          child: const Icon(Icons.settings),
+        ),
       ),
     );
   }
