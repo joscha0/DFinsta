@@ -29,36 +29,31 @@ main > section > div:first-child {
 """;
 
   String cssHideExplore = """
-[role=main] {
+main > div > div > div {
    display: none!important;
 }
 """;
 
-  String getHideCss(Uri? url) {
-    print(url!.path);
+  String cssHideNavBar = """
+#react-root > section > :nth-child(4) {
+  display: none!important;
+}
+""";
 
+  String getHideCss() {
     String css = "";
 
-    switch (url.path) {
-      case "/":
-        {
-          if (hideFeed.value) {
-            css += cssHideFeed;
-          }
-          if (hideStories.value) {
-            css += cssHideStories;
-          }
-        }
+    // css += cssHideNavBar;
 
-        break;
-      case "/explore":
-        {
-          if (hideExplore.value) {
-            css += cssHideExplore;
-          }
-        }
-        break;
-      default:
+    if (hideFeed.value) {
+      css += cssHideFeed;
+    }
+    if (hideStories.value) {
+      css += cssHideStories;
+    }
+
+    if (hideExplore.value) {
+      css += cssHideExplore;
     }
 
     return css;
