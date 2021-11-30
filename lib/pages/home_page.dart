@@ -16,15 +16,28 @@ class HomePage extends GetView<HomeController> {
         toolbarHeight: 0,
       ),
       body: InAppWebView(
+        initialOptions: InAppWebViewGroupOptions(
+          crossPlatform: InAppWebViewOptions(useShouldOverrideUrlLoading: true),
+        ),
         initialUrlRequest: URLRequest(
           url: MediaQuery.of(context).platformBrightness == Brightness.dark
               ? Uri.parse("https://www.instagram.com/?theme=dark")
               : Uri.parse("https://www.instagram.com/"),
         ),
+        onWebViewCreated: (webController) {
+          controller.webViewController = webController;
+        },
         onLoadStop: (webController, url) async {
           Uri? currentUrl = await webController.getUrl();
           String css = controller.getHideCss(currentUrl);
           await webController.injectCSSCode(source: css);
+        },
+        shouldOverrideUrlLoading: (webController, navigationAction) async {
+          Uri? currentUrl = navigationAction.request.url;
+          print(currentUrl);
+          String css = controller.getHideCss(currentUrl);
+          await webController.injectCSSCode(source: css);
+          return NavigationActionPolicy.ALLOW;
         },
       ),
       floatingActionButton: Padding(

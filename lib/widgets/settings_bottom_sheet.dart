@@ -42,7 +42,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideExplore = value;
                       });
-                      controller.setHideExplore(value);
+                      controller.setHide("hideExplore", value);
                     },
                   ),
                   SwitchListTile(
@@ -52,7 +52,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideStories = value;
                       });
-                      controller.setHideStorie(value);
+                      controller.setHide("hideStories", value);
                     },
                   ),
                   SwitchListTile(
@@ -62,7 +62,7 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                       setState(() {
                         hideFeed = value;
                       });
-                      controller.setHideFeed(value);
+                      controller.setHide("hideFeed", value);
                     },
                   ),
                 ],
