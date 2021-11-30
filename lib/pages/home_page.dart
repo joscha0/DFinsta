@@ -7,40 +7,34 @@ import 'package:get/get.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   final String url = "https://instagram.com/";
+  final GlobalKey webViewKey = GlobalKey();
+
+  InAppWebViewController? webViewController;
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => HomeController());
+    Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
       ),
       body: InAppWebView(
-        initialOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(useShouldOverrideUrlLoading: true),
-        ),
-        initialUrlRequest: URLRequest(
-          url: MediaQuery.of(context).platformBrightness == Brightness.dark
-              ? Uri.parse(url + "?theme=dark")
-              : Uri.parse(url),
-        ),
+        key: webViewKey,
         onWebViewCreated: (webController) {
-          controller.webViewController = webController;
+          webViewController = webController;
+          webViewController?.loadUrl(
+              urlRequest: URLRequest(
+            url: MediaQuery.of(context).platformBrightness == Brightness.dark
+                ? Uri.parse(url + "?theme=dark")
+                : Uri.parse(url),
+          ));
         },
         onLoadStop: (webController, url) async {
-          Uri? currentUrl = await webController.getUrl();
           String css = controller.getHideCss();
-          await webController.injectCSSCode(source: css);
-        },
-        shouldOverrideUrlLoading: (webController, navigationAction) async {
-          Uri? currentUrl = navigationAction.request.url;
-          print(currentUrl);
-          String css = controller.getHideCss();
-          await webController.injectCSSCode(source: css);
-          return NavigationActionPolicy.ALLOW;
+          await webViewController?.injectCSSCode(source: css);
         },
       ),
       floatingActionButton: Padding(
@@ -48,7 +42,7 @@ class HomePage extends GetView<HomeController> {
         child: FloatingActionButton.small(
           onPressed: () {
             Get.bottomSheet(
-              const SettingsBottomSheet(),
+              SettingsBottomSheet(webViewController: webViewController),
             );
           },
           child: const Icon(Icons.settings),

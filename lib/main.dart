@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             primary: primaryColor,
           )),
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

@@ -1,9 +1,16 @@
 import 'package:dfinsta/pages/home_controller.dart';
+import 'package:dfinsta/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_inappwebview/src/in_app_webview/in_app_webview_controller.dart';
 import 'package:get/get.dart';
 
 class SettingsBottomSheet extends StatefulWidget {
-  const SettingsBottomSheet({Key? key}) : super(key: key);
+  InAppWebViewController? webViewController;
+  SettingsBottomSheet({
+    Key? key,
+    required this.webViewController,
+  }) : super(key: key);
 
   @override
   _SettingsBottomSheetState createState() => _SettingsBottomSheetState();
@@ -43,6 +50,9 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         hideExplore = value;
                       });
                       controller.setHide("hideExplore", value);
+                      widget.webViewController
+                          ?.injectCSSCode(source: controller.getHideCss());
+                      widget.webViewController?.reload();
                     },
                   ),
                   SwitchListTile(
@@ -53,6 +63,9 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         hideStories = value;
                       });
                       controller.setHide("hideStories", value);
+                      widget.webViewController
+                          ?.injectCSSCode(source: controller.getHideCss());
+                      widget.webViewController?.reload();
                     },
                   ),
                   SwitchListTile(
@@ -63,8 +76,18 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         hideFeed = value;
                       });
                       controller.setHide("hideFeed", value);
+                      widget.webViewController
+                          ?.injectCSSCode(source: controller.getHideCss());
+                      widget.webViewController?.reload();
                     },
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.offAll(HomePage());
+                    },
+                    child: const Text("restart app"),
+                  ),
+                  Text("(if the dark mode turns of)"),
                 ],
               ),
             ),

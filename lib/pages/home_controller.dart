@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
-  InAppWebViewController? webViewController;
-
   final box = GetStorage();
   RxBool get hideExplore => RxBool(box.read("hideExplore") ?? true);
   RxBool get hideStories => RxBool(box.read("hideStories") ?? false);
@@ -13,7 +11,6 @@ class HomeController extends GetxController {
 
   void setHide(String key, bool value) {
     box.write(key, value);
-    webViewController?.reload();
   }
 
   String cssHideFeed = """
