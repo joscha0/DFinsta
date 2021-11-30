@@ -1,5 +1,5 @@
-import 'package:dfinsta/pages/home_controller.dart';
-import 'package:dfinsta/pages/home_page.dart';
+import 'package:DFinsta/pages/home_controller.dart';
+import 'package:DFinsta/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_inappwebview/src/in_app_webview/in_app_webview_controller.dart';

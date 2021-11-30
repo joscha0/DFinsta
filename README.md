@@ -1,4 +1,4 @@
-# dfinsta
+# DFinsta
 
 A new Flutter project.
 

@@ -1,6 +1,6 @@
 {
-    "name": "dfinsta",
-    "short_name": "dfinsta",
+    "name": "DFinsta",
+    "short_name": "DFinsta",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
