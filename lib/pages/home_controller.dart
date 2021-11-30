@@ -1,16 +1,10 @@
+import 'package:dfinsta/widgets/settings_bottom_sheet.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
   InAppWebViewController? webViewController;
-
-  var tabIndex = 0;
-
-  void changeTabIndex(int index) {
-    tabIndex = index;
-    update();
-  }
 
   final box = GetStorage();
   RxBool get hideExplore => RxBool(box.read("hideExplore") ?? true);
